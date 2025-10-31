@@ -23,7 +23,7 @@ const experiencesToSeed = [
     id: 2,
     title: 'Nandi Hills Sunrise',
     location: 'Bangalore',
-    image: 'https://images.pexels.com/photos/1054218/pexels-photo-1054218.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    image: 'https://media.istockphoto.com/id/1372121141/photo/hilltop-view-of-nandi-hills-hill-station-located-near-bangalore-karnataka-india.jpg?s=1024x1024&w=is&k=20&c=yY7FujSPWEnqKAxKMvLhUO7lsnxHuC3XLXPj99RPrQk=',
     description: 'Curated small-group experience. Certified guide. Safety first with gear included.',
     price: 899,
     availableSlots: [
@@ -50,7 +50,7 @@ const experiencesToSeed = [
     id: 4,
     title: 'Scuba Diving',
     location: 'Goa',
-    image: 'https://images.unsplash.com/photo-1590510123568-8f2343c39c4d?q=80&w=1470&auto=format&fit=crop',
+    image: 'https://plus.unsplash.com/premium_photo-1661894232140-73d96a67731b?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=2070',
     description: 'Explore the vibrant underwater world. Certified instructors. All gear provided.',
     price: 3499,
     availableSlots: [
@@ -64,7 +64,7 @@ const experiencesToSeed = [
     id: 5,
     title: 'Rishikesh River Rafting',
     location: 'Rishikesh',
-    image: 'https://images.unsplash.com/photo-1600713781313-06a5f760e6f6?q=80&w=1374&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1685550903259-96799741df9e?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=2046',
     description: 'Thrilling white water rafting experience. Safety kayakers included. Camp included.',
     price: 2499,
     availableSlots: [
@@ -77,7 +77,7 @@ const experiencesToSeed = [
     id: 6,
     title: 'Manali Paragliding',
     location: 'Manali',
-    image: 'https://images.unsplash.com/photo-1514828390987-7313a5f3b836?q=80&w=1470&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1719949122509-74d0a1d08b44?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1936',
     description: 'Soar over the Solang Valley. 15-minute tandem flight with certified pilot.',
     price: 2999,
     availableSlots: [
@@ -90,7 +90,7 @@ const experiencesToSeed = [
     id: 7,
     title: 'Mumbai Food Tour',
     location: 'Mumbai',
-    image: 'https://images.unsplash.com/photo-1588269719208-68f7637c352a?q=80&w=1374&auto=format&fit=crop',
+    image: 'https://media.istockphoto.com/id/537817390/photo/vada-pav-or-vada-pav.jpg?s=1024x1024&w=is&k=20&c=GJ5t5uf0HvbU_GA7Snx8s5Zo14790XDhYU4hlSm4eXQ=',
     description: 'Discover the best street food Mumbai has to offer. 4-hour guided walking tour.',
     price: 1499,
     availableSlots: [
@@ -103,7 +103,7 @@ const experiencesToSeed = [
     id: 8,
     title: 'Jaipur Heritage Walk',
     location: 'Jaipur',
-    image: 'https://images.unsplash.com/photo-1567225555776-a0b0f0c2c51f?q=80&w=1528&auto=format&fit=crop',
+    image: 'https://plus.unsplash.com/premium_photo-1691031428843-fffcb81cf454?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1974',
     description: 'Explore the Pink City\'s forts and palaces. Includes entry tickets and local guide.',
     price: 1199,
     availableSlots: [
