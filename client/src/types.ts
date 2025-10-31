@@ -19,7 +19,6 @@ export interface Experience {
   availableSlots: Slot[];
 }
 
-// For your promo code state
 export interface Promo {
   code: string;
   discountType: 'percentage' | 'flat';

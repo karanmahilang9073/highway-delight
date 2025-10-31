@@ -1,6 +1,6 @@
 import Booking from '../models/Booking.js';
 import User from '../models/User.js';
-import Experience from '../models/Experience.js'; // 1. Import the Experience model
+import Experience from '../models/Experience.js'; 
 import { findOrCreateUser } from './userController.js'; 
 
 // Helper function to generate a random booking reference
@@ -15,10 +15,9 @@ const generateBookingRef = () => {
 
 export const createBooking = async (req, res) => {
   try {
-    // 1. Get all the data from the frontend
     const {
       experienceId,
-      slotId, // <-- We now get the slotId
+      slotId, 
       fullName,
       email,
       phone,
@@ -28,30 +27,22 @@ export const createBooking = async (req, res) => {
       total,
     } = req.body;
 
-    // 2. Find or create the user
     const user = await findOrCreateUser(email, fullName, phone);
 
-    // --- CHECK 1: Has this user (email) already booked this slot? ---
-    // This is the "message for same email" you asked for
+    //check already booked
     const existingBooking = await Booking.findOne({ user: user._id, slotId: slotId });
     if (existingBooking) {
-      return res.status(400).json({
-        success: false,
-        message: 'You (this email) have already booked this time slot.',
-      });
+      return res.status(400).json({success: false, message: 'You (this email) have already booked this time slot.',});
     }
 
-    // --- CHECK 2: Is this slot full? (Prevent double-booking) ---
-    // Find the experience that contains the slot we want to book
+    //chech slots
     const experience = await Experience.findOne({ "availableSlots._id": slotId });
-    
     if (!experience) {
       return res.status(404).json({ success: false, message: 'Slot not found.' });
     }
     
-    // Find the specific slot within that experience
+    // Find  specific slot within experience
     const slot = experience.availableSlots.id(slotId);
-
     if (!slot) {
       return res.status(404).json({ success: false, message: 'Slot not found.' });
     }
@@ -59,22 +50,15 @@ export const createBooking = async (req, res) => {
     // Check if the quantity they want exceeds the remaining capacity
     if (slot.bookingsCount + quantity > slot.totalCapacity) {
       const remainingSpots = slot.totalCapacity - slot.bookingsCount;
-      return res.status(400).json({
-        success: false,
-        message: `Not enough spots available. Only ${remainingSpots} spots left.`,
+      return res.status(400).json({success: false, message: `Not enough spots available. Only ${remainingSpots} spots left.`,
       });
     }
 
-    // --- All checks passed! We can create the booking. ---
-
-    // 3. Generate a unique booking reference
     const bookingRef = generateBookingRef();
-
-    // 4. Create the new booking
     const newBooking = new Booking({
       user: user._id,
       experienceId,
-      slotId: slotId, // <-- Save the slotId
+      slotId: slotId, 
       date,
       time,
       quantity,
@@ -82,25 +66,15 @@ export const createBooking = async (req, res) => {
       bookingRef,
     });
 
-    // 5. Save the booking
     await newBooking.save();
 
-    // 6. CRITICAL: Update the bookingsCount for the slot
     slot.bookingsCount += quantity;
-    await experience.save(); // Save the change to the experience document
+    await experience.save(); 
 
-    // 7. Send a success response
-    res.status(201).json({
-      success: true,
-      message: 'Booking successful!',
-      booking: newBooking,
-    });
+    res.status(201).json({success: true,message: 'Booking successful!',booking: newBooking,});
 
   } catch (err) {
     console.error('Error creating booking:', err);
-    res.status(500).json({
-      success: false,
-      message: 'Failed to create booking. Please try again.',
-    });
+    res.status(500).json({success: false,message: 'Failed to create booking. Please try again.',});
   }
 };

@@ -1,11 +1,8 @@
 import  { useState, useEffect, useMemo } from 'react';
 import { useParams, Link } from 'react-router-dom';
-// import { AxiosError } from 'axios';
-// --- OPTIMIZATION: Import from new central files ---
 import api from '../api';
 import type { Experience, Slot } from '../types';
 
-// This type is only used here, so it's fine to keep it
 interface GroupedSlots {
   [date: string]: Slot[];
 }
@@ -25,7 +22,6 @@ const Details = () => {
       setLoading(true);
       setError(false);
       try {
-        // --- OPTIMIZATION: Use 'api' instance ---
         const response = await api.get(`/experiences/${id}`);
         setExperience(response.data);
       } catch (err: unknown) {
@@ -119,8 +115,7 @@ const Details = () => {
                         key={slot._id}
                         onClick={() => setSelectedSlot(slot)}
                         disabled={isSoldOut}
-                        className={`
-                          py-2 px-4 rounded transition-colors
+                        className={`py-2 px-4 rounded transition-colors
                           ${isSelected ? 'bg-yellow-400 text-black font-bold ring-2 ring-yellow-500' : 'bg-gray-200 text-gray-700'}
                           ${isSoldOut ? 'opacity-50 cursor-not-allowed bg-red-100 text-red-500' : 'hover:bg-gray-300'}
                         `}
@@ -157,17 +152,11 @@ const Details = () => {
             <div className="flex justify-between items-center mb-4">
               <span className="text-gray-600">Quantity</span>
               <div className="flex items-center gap-2">
-                <button 
-                  onClick={() => setQuantity(q => Math.max(1, q - 1))} 
-                  className="bg-gray-200 px-2 rounded"
-                >
+                <button onClick={() => setQuantity(q => Math.max(1, q - 1))} className="bg-gray-200 px-2 rounded">
                   -
                 </button>
                 <span>{quantity}</span>
-                <button 
-                  onClick={handleIncreaseQuantity} 
-                  className="bg-gray-200 px-2 rounded"
-                >
+                <button onClick={handleIncreaseQuantity} className="bg-gray-200 px-2 rounded">
                   +
                 </button>
               </div>
@@ -189,9 +178,8 @@ const Details = () => {
               <span className="font-bold text-lg">₹{total}</span>
             </div>
             
-            <Link 
-              to="/checkout"
-              state={{
+            <Link to="/checkout"
+            state={{
                 experience,
                 selectedSlot,
                 quantity,
@@ -199,8 +187,7 @@ const Details = () => {
                 taxes,
                 total
               }}
-              className={`
-                w-full bg-yellow-400 text-black font-bold py-3 px-4 rounded text-center block
+              className={`w-full bg-yellow-400 text-black font-bold py-3 px-4 rounded text-center block
                 ${!selectedSlot ? 'opacity-50 cursor-not-allowed' : 'hover:bg-yellow-500'}
               `}
               onClick={(e) => {

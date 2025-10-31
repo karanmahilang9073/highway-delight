@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-// --- OPTIMIZATION: Import from new central file ---
 import type { Experience } from '../types';
 
 interface ExperienceCardProps {
@@ -9,11 +8,7 @@ interface ExperienceCardProps {
 export default function ExperienceCard({ experience }: ExperienceCardProps) {
   return (
     <div className="border border-gray-200 rounded-lg shadow-sm overflow-hidden flex flex-col">
-      <img 
-        src={experience.image} 
-        alt={`Photo of ${experience.title}`} 
-        className="w-full h-48 object-cover" 
-      />
+      <img src={experience.image}  alt={`Photo of ${experience.title}`} className="w-full h-48 object-cover" />
       
       <div className="p-4 flex flex-col grow">
         <div className="flex justify-between items-center mb-1">
@@ -29,10 +24,7 @@ export default function ExperienceCard({ experience }: ExperienceCardProps) {
           <span className="font-semibold text-lg text-gray-800">
             From ₹{experience.price}
           </span>
-          <Link
-            to={`/details/${experience.id}`}
-            className="bg-yellow-400 text-gray-900 px-4 py-2 rounded-md font-semibold hover:bg-yellow-500 text-sm"
-          >
+          <Link to={`/details/${experience.id}`}className="bg-yellow-400 text-gray-900 px-4 py-2 rounded-md font-semibold hover:bg-yellow-500 text-sm">
             View Details
           </Link>
         </div>

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { AxiosError } from 'axios';
 import ExperienceCard from '../components/ExperienceCard';
-// --- OPTIMIZATION: Import from new central files ---
 import api from '../api';
 import type { Experience } from '../types';
 
@@ -19,7 +18,6 @@ const Home: React.FC<HomeProps> = ({ searchTerm }) => {
       setLoading(true);
       setError(null);
       try {
-        // --- OPTIMIZATION: Use 'api' instance ---
         const response = await api.get('/experiences', {
           params: { search: searchTerm }
         });

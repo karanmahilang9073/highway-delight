@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AxiosError } from 'axios';
-// --- OPTIMIZATION: Import from new central files ---
 import api from '../api';
-import type { Promo, CheckoutLocationState } from '../types'; // Slot/Experience are in CheckoutLocationState
+import type { Promo, CheckoutLocationState } from '../types'; 
 
 const Checkout = () => {
   const location = useLocation();
   const navigate = useNavigate();
   
-  // --- OPTIMIZATION: Apply the new type to location.state ---
   const {
     experience,
     selectedSlot,
@@ -24,23 +22,20 @@ const Checkout = () => {
     taxes: 0,
   };
 
-  // --- Form State ---
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [agree, setAgree] = useState(false);
   const [isBooking, setIsBooking] = useState(false);
 
-  // --- Promo Code State ---
   const [promoCode, setPromoCode] = useState('');
   const [promoError, setPromoError] = useState('');
   const [discountAmount, setDiscountAmount] = useState(0);
   const [appliedPromo, setAppliedPromo] = useState<Promo | null>(null);
 
-  // --- Calculate Final Total ---
   const finalTotal = subtotal + taxes - discountAmount;
 
-  // --- Handle Promo Code Apply ---
+  // promocode function 
   const handleApplyPromo = async (e: React.MouseEvent) => {
     e.preventDefault();
     setPromoError('');
@@ -52,7 +47,6 @@ const Checkout = () => {
       return;
     }
     try {
-      // --- OPTIMIZATION: Use 'api' instance ---
       const response = await api.post('/promo/validate', { 
         code: promoCode 
       });
@@ -75,7 +69,6 @@ const Checkout = () => {
     }
   };
 
-  // --- Handle Final Booking Submission ---
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!agree) {
@@ -98,7 +91,6 @@ const Checkout = () => {
     };
 
     try {
-      // --- OPTIMIZATION: Use 'api' instance ---
       const response = await api.post('/bookings', bookingDetails);
       
       if (response.data.token) {
@@ -133,80 +125,45 @@ const Checkout = () => {
     )
   }
 
-  // --- THIS IS THE FULL, CORRECT JSX ---
   return (
     <div className="container mx-auto px-6 py-8">
       <div className="flex flex-col md:flex-row gap-8">
         
-        {/* Left Side: Checkout Form */}
         <div className="w-full md:w-2/3">
           <h1 className="text-3xl font-bold mb-6">Checkout</h1>
           <form onSubmit={handleSubmit} id="checkout-form" className="space-y-6">
             
-            {/* Full Name & Email (in a row) */}
             <div className="flex flex-col md:flex-row gap-6">
               <div className="w-full">
                 <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-1">
                   Full name
                 </label>
-                <input
-                  type="text"
-                  id="fullName"
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
-                  className="w-full border border-gray-300 rounded-md py-2 px-3"
-                  required
-                />
+                <input type="text" id="fullName" value={fullName} onChange={(e) => setFullName(e.target.value)} className="w-full border border-gray-300 rounded-md py-2 px-3" required />
               </div>
+
               <div className="w-full">
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
                   Email
                 </label>
-                <input
-                  type="email"
-                  id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full border border-gray-300 rounded-md py-2 px-3"
-                  required
-                />
+                <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full border border-gray-300 rounded-md py-2 px-3" required />
               </div>
             </div>
 
-            {/* Phone Number */}
             <div>
               <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
                 Phone
               </label>
-              <input
-                type="tel"
-                id="phone"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                className="w-full border border-gray-300 rounded-md py-2 px-3"
-                required
-              />
+              <input type="tel" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} className="w-full border border-gray-300 rounded-md py-2 px-3" required />
             </div>
 
-            {/* --- Promo Code Section --- */}
+            
             <div>
               <label htmlFor="promo" className="block text-sm font-medium text-gray-700 mb-1">
                 Promo code
               </label>
               <div className="flex">
-                <input
-                  type="text"
-                  id="promo"
-                  value={promoCode}
-                  onChange={(e) => setPromoCode(e.target.value.toUpperCase())}
-                  className="w-full border border-gray-300 rounded-l-md py-2 px-3"
-                  placeholder="e.g. SAVE10"
-                />
-                <button
-                  type="button" // Important: set type to "button"
-                  onClick={handleApplyPromo}
-                  className="bg-gray-700 text-white font-bold py-2 px-4 rounded-r-md"
-                >
+                <input type="text" id="promo" value={promoCode} onChange={(e) => setPromoCode(e.target.value.toUpperCase())} className="w-full border border-gray-300 rounded-l-md py-2 px-3" placeholder="e.g. SAVE10"/>
+                <button type="button" onClick={handleApplyPromo} className="bg-gray-700 text-white font-bold py-2 px-4 rounded-r-md">
                   Apply
                 </button>
               </div>
@@ -220,16 +177,8 @@ const Checkout = () => {
               )}
             </div>
             
-            {/* Agreement Checkbox */}
             <div className="flex items-center">
-              <input
-                type="checkbox"
-                id="agree"
-                checked={agree}
-                onChange={(e) => setAgree(e.target.checked)}
-                className="h-4 w-4 text-yellow-500 border-gray-300 rounded"
-                required
-              />
+              <input type="checkbox" id="agree" checked={agree} onChange={(e) => setAgree(e.target.checked)}className="h-4 w-4 text-yellow-500 border-gray-300 rounded" required />
               <label htmlFor="agree" className="ml-2 block text-sm text-gray-900">
                 I agree to the terms and safety policy.
               </label>
@@ -284,12 +233,7 @@ const Checkout = () => {
               <span className="font-bold text-lg">₹{finalTotal.toFixed(2)}</span>
             </div>
             
-            <button
-              type="submit"
-              form="checkout-form"
-              className="w-full bg-yellow-400 text-black font-bold py-3 px-4 rounded text-center block disabled:opacity-50"
-              disabled={isBooking}
-            >
+            <button type="submit" form="checkout-form" className="w-full bg-yellow-400 text-black font-bold py-3 px-4 rounded text-center block disabled:opacity-50" disabled={isBooking}>
               {isBooking ? 'Processing...' : 'Pay and Confirm'}
             </button>
           </div>

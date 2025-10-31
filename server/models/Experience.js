@@ -1,9 +1,8 @@
 import mongoose from 'mongoose';
-import { slotSchema } from './Slot.js'; // 1. Import the slot schema
+import { slotSchema } from './Slot.js'; 
 
-// This is the main schema for the Experience
 const experienceSchema = new mongoose.Schema({
-  id: { // We keep this for simplicity linking to old mock data
+  id: { 
     type: Number,
     required: true,
     unique: true,
@@ -28,7 +27,6 @@ const experienceSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  // 2. We embed the slots schema here
   availableSlots: [slotSchema], 
 }, {
   timestamps: true,

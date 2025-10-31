@@ -2,7 +2,6 @@ import mongoose from 'mongoose';
 import 'dotenv/config'; 
 import Experience from './models/Experience.js'; // Import our new model
 
-// --- Our Seed Data (8 Experiences) ---
 const experiencesToSeed = [
   // --- Experience 1 ---
   {
@@ -24,7 +23,7 @@ const experiencesToSeed = [
     id: 2,
     title: 'Nandi Hills Sunrise',
     location: 'Bangalore',
-    image: 'https://images.unsplash.com/photo-1583383860542-03c1b0a9b219?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNjUyOXwwfDF8c2VhcmNofDF8fG5hbmRpJTIwaGlsbHMlMjBzdW5yaXNlfGVufDB8fHx8MTY5ODU4NzIwMA&ixlib=rb-4.0.3&q=80&w=1080',
+    image: 'https://images.pexels.com/photos/1054218/pexels-photo-1054218.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     description: 'Curated small-group experience. Certified guide. Safety first with gear included.',
     price: 899,
     availableSlots: [

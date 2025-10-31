@@ -8,15 +8,14 @@ const userSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-    unique: true, // This ensures one email per user
-    lowercase: true // This makes searching easier
+    unique: true, 
+    lowercase: true 
   },
   phone: { 
     type: String, 
     required: true 
   },
 }, { 
-  // This adds 'createdAt' and 'updatedAt' fields automatically
   timestamps: true 
 });
 
